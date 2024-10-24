@@ -1,0 +1,4 @@
+﻿  main1.cpp
+C:\Users\ПК\Desktop\stack\stack\main1.cpp(54,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ПК\Desktop\stack\stack\main1.cpp(72): warning C4715: 'checkBrackets': not all control paths return a value
+  stack.vcxproj -> C:\Users\ПК\Desktop\stack\x64\Debug\stack.exe
