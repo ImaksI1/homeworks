@@ -47,8 +47,8 @@ x86/
 *.cpp
 *.hpp
 *.h
-!.gitignore
 README.md
+.gitignore
 
 # Дозволяємо зберігати структуру папок за допомогою .keep файлів
 !*/.keep
