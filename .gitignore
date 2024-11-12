@@ -25,7 +25,6 @@ Thumbs.db
 *.vcxproj.filters
 *.idea/
 *.vscode/
-.vscode/
 .vs/
 
 # Ігноруємо резервні та тимчасові файли
@@ -39,9 +38,12 @@ Thumbs.db
 Makefile
 CMakeLists.txt.user
 
-# Залишаємо лише вихідний код
+# Дозволяємо лише потрібні файли
 !.gitignore
 *.cpp
 *.hpp
 *.h
 README.md
+
+# Дозволяємо зберегти порожні папки з файлом .keep
+!*/.keep
