@@ -1,49 +1,54 @@
 # Ігноруємо всі скомпільовані файли
-*.o
-*.out
+*.obj
 *.exe
 *.dll
-*.so
-*.dylib
-
-# Ігноруємо файли збірки і тимчасові файли
-/build/
-bin/
-*.obj
 *.pdb
 *.ilk
 *.idb
+*.ipdb
+*.iobj
 *.log
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.user
+*.userosscache
+*.suo
+*.sdf
+*.cachefile
 
-# Ігноруємо файли систем та IDE
-.DS_Store
-Thumbs.db
+# Ігноруємо вихідні папки для збірки Visual Studio
+[Bb]uild*/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# Ігноруємо файли середовища Visual Studio
+*.VC.db
+*.VC.opendb
+.vscode/
+.vs/
+*.VC.VC.opendb
+
+# Ігноруємо тимчасові файли та резервні копії
 *.swp
 *.swo
-*.sln
-*.vcxproj
-*.vcxproj.filters
-*.idea/
-*.vscode/
-.vs/
-
-# Ігноруємо резервні та тимчасові файли
-*~
-*.tmp
 *.bak
 *.old
 *.orig
 
-# Ігноруємо Makefile файли збірки, якщо вони не потрібні для проекту
-Makefile
-CMakeLists.txt.user
-
-# Дозволяємо лише потрібні файли
-!.gitignore
+# Залишаємо лише вихідний код та основні конфігураційні файли
 *.cpp
 *.hpp
 *.h
+!.gitignore
 README.md
 
-# Дозволяємо зберегти порожні папки з файлом .keep
+# Дозволяємо зберігати структуру папок за допомогою .keep файлів
 !*/.keep
