@@ -1,32 +1,47 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+# Ігноруємо всі скомпільовані файли
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
+*.out
+*.exe
+*.dll
 *.so
 *.dylib
-*.dll
 
-# Fortran module files
-*.mod
-*.smod
+# Ігноруємо файли збірки і тимчасові файли
+/build/
+bin/
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.log
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Ігноруємо файли систем та IDE
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.idea/
+*.vscode/
+.vscode/
+.vs/
 
-# Executables
-*.exe
-*.out
-*.app
+# Ігноруємо резервні та тимчасові файли
+*~
+*.tmp
+*.bak
+*.old
+*.orig
+
+# Ігноруємо Makefile файли збірки, якщо вони не потрібні для проекту
+Makefile
+CMakeLists.txt.user
+
+# Залишаємо лише вихідний код
+!.gitignore
+*.cpp
+*.hpp
+*.h
+README.md
