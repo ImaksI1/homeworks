@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -9,8 +8,6 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node() : data(0), left(nullptr), right(nullptr) {}
-
     Node(int data, Node* left = nullptr, Node* right = nullptr) {
         this->data = data;
         this->left = left;
@@ -19,20 +16,16 @@ struct Node {
 
     void Add(int elem) {
         if (elem < data) {
-            if (this->left == nullptr) {
+            if (!left)
                 left = new Node(elem);
-            }
-            else {
-                this->left->Add(elem);
-            }
+            else
+                left->Add(elem);
         }
         else {
-            if (this->right == nullptr) {
+            if (!right)
                 right = new Node(elem);
-            }
-            else {
-                this->right->Add(elem);
-            }
+            else
+                right->Add(elem);
         }
     }
 };
@@ -40,61 +33,86 @@ struct Node {
 class Tree {
 private:
     Node* root;
+
+    void clear(Node* node) {
+        if (node) {
+            clear(node->left);
+            clear(node->right);
+            delete node;
+        }
+    }
+
 public:
     Tree() : root(nullptr) {}
 
+    ~Tree() {
+        clear(root);
+    }
+
     void Add(int elem) {
-        if (root == nullptr) {
+        if (!root)
             root = new Node(elem);
-        }
-        else {
+        else
             root->Add(elem);
-        }
     }
 
     Node* getRoot() {
         return root;
     }
-    void inDepth(Node* root) {
-        if (root == nullptr) return;
 
-        cout << root->data << " ";  
-        inDepth(root->left);        
-        inDepth(root->right);       
+    vector<int> inDepth() {
+        vector<int> result;
+        if (!root) return result;
+
+        vector<Node*> stack = { root }; 
+
+        while (!stack.empty()) {
+            Node* current = stack.back();
+            stack.pop_back();
+            result.push_back(current->data);
+
+            if (current->right) stack.push_back(current->right);
+            if (current->left) stack.push_back(current->left);
+        }
+        return result;
     }
 
-    void inBreadth(Node* root) {
-        if (root == nullptr) return;
+    vector<int> inWidth() {
+        vector<int> result;
+        if (!root) return result;
 
-        vector<Node*> queue;
-        queue.push_back(root);  
+        vector<Node*> queue = { root };  
+        size_t head = 0; 
 
-        while (!queue.empty()) {
-            Node* current = queue[0];  
-            queue.erase(queue.begin());  
-
-            cout << current->data << " ";  
+        while (head < queue.size()) {
+            Node* current = queue[head++];
+            result.push_back(current->data);
 
             if (current->left) queue.push_back(current->left);
             if (current->right) queue.push_back(current->right);
         }
+        return result;
     }
 };
 
 int main() {
-    Tree a;
-    a.Add(10);
-    a.Add(5);
-    a.Add(20);
-    a.Add(3);
-    a.Add(15);
+    Tree tree;
+    tree.Add(10);
+    tree.Add(5);
+    tree.Add(20);
+    tree.Add(3);
+    tree.Add(15);
 
-    cout << "Depth: ";
-    a.inDepth(a.getRoot());  
+    cout << "in Depth: ";
+    for (int val : tree.inDepth()) {
+        cout << val << " ";
+    }
     cout << endl;
 
-    cout << "Breadth: ";
-    a.inBreadth(a.getRoot());  
+    cout << "in Width: ";
+    for (int val : tree.inWidth()) {
+        cout << val << " ";
+    }
     cout << endl;
 
     return 0;

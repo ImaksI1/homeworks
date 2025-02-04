@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3f753da8-7e17-409d-8caa-c56469c9adc5}</ProjectGuid>
+    <ProjectGuid>{4ebf954a-ccb7-4864-b368-a46b67a9685d}</ProjectGuid>
     <RootNamespace>Iterators</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
