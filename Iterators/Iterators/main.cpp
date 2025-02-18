@@ -60,38 +60,82 @@ public:
         return root;
     }
 
-    vector<int> inDepth() {
-        vector<int> result;
-        if (!root) return result;
+    class DepthIterator {
+    private:
+        vector<Node*> nodes;
 
-        vector<Node*> stack = { root }; 
-
-        while (!stack.empty()) {
-            Node* current = stack.back();
-            stack.pop_back();
-            result.push_back(current->data);
-
-            if (current->right) stack.push_back(current->right);
-            if (current->left) stack.push_back(current->left);
+    public:
+        DepthIterator(Node* root) {
+            if (root) {
+                nodes.push_back(root);
+            }
         }
-        return result;
+
+        bool hasNext() {
+            return !nodes.empty();
+        }
+
+        int next() {
+            if (nodes.empty()) {
+                throw out_of_range("No more elements");
+            }
+
+            Node* current = nodes.back();
+            nodes.pop_back();
+
+            if (current->right) {
+                nodes.push_back(current->right);
+            }
+
+            if (current->left) {
+                nodes.push_back(current->left);
+            }
+
+            return current->data;
+        }
+    };
+
+    class WidthIterator {
+    private:
+        vector<Node*> nodes;
+        size_t index;
+
+    public:
+        WidthIterator(Node* root) : index(0) {
+            if (root) {
+                nodes.push_back(root);
+            }
+        }
+
+        bool hasNext() {
+            return index < nodes.size();
+        }
+
+        int next() {
+            if (index >= nodes.size()) {
+                throw out_of_range("No more elements");
+            }
+
+            Node* current = nodes[index++];
+
+            if (current->left) {
+                nodes.push_back(current->left);
+            }
+
+            if (current->right) {
+                nodes.push_back(current->right);
+            }
+
+            return current->data;
+        }
+    };
+
+    DepthIterator depthIterator() {
+        return DepthIterator(root);
     }
 
-    vector<int> inWidth() {
-        vector<int> result;
-        if (!root) return result;
-
-        vector<Node*> queue = { root };  
-        size_t head = 0; 
-
-        while (head < queue.size()) {
-            Node* current = queue[head++];
-            result.push_back(current->data);
-
-            if (current->left) queue.push_back(current->left);
-            if (current->right) queue.push_back(current->right);
-        }
-        return result;
+    WidthIterator widthIterator() {
+        return WidthIterator(root);
     }
 };
 
@@ -104,14 +148,16 @@ int main() {
     tree.Add(15);
 
     cout << "in Depth: ";
-    for (int val : tree.inDepth()) {
-        cout << val << " ";
+    Tree::DepthIterator depthIter = tree.depthIterator();
+    while (depthIter.hasNext()) {
+        cout << depthIter.next() << " ";
     }
     cout << endl;
 
     cout << "in Width: ";
-    for (int val : tree.inWidth()) {
-        cout << val << " ";
+    Tree::WidthIterator widthIter = tree.widthIterator();
+    while (widthIter.hasNext()) {
+        cout << widthIter.next() << " ";
     }
     cout << endl;
 
